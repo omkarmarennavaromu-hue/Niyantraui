@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Features — NIYANTRA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --navy:#0B1D3A;
+      --grey:#5A6473;
+      --cream:#F4E7D3;
+      --orange:#F2A65A;
+      --red:#C44536;
+      --green:#1E6F5C;
+      --shadow:0 24px 80px rgba(11,29,58,0.45);
+      --border:1px solid rgba(244,231,211,0.12);
+    }
+    body{
+      background:
+        radial-gradient(circle at top left, rgba(242,166,90,0.12), transparent 24%),
+        radial-gradient(circle at bottom right, rgba(30,111,92,0.12), transparent 25%),
+        linear-gradient(180deg, var(--navy) 0%, rgba(11,29,58,0.98) 44%, var(--grey) 100%);
+      color:var(--cream);
+      min-height:100vh;
+    }
+    .glass{
+      background:rgba(90,100,115,0.18);
+      backdrop-filter: blur(18px);
+      border:var(--border);
+      box-shadow:var(--shadow);
+    }
+    .feature-card{
+      background:linear-gradient(180deg, rgba(90,100,115,0.20), rgba(11,29,58,0.35));
+      border:var(--border);
+      box-shadow:var(--shadow);
+      transition:all .28s ease;
+    }
+    .feature-card:hover{
+      transform:translateY(-6px);
+      border-color:rgba(242,166,90,0.34);
+    }
+    .btn-primary{
+      background:var(--orange);
+      color:var(--navy);
+      transition:all .25s ease;
+    }
+    .btn-primary:hover{
+      transform:translateY(-2px);
+      box-shadow:0 14px 28px rgba(242,166,90,0.28);
+    }
+    .btn-secondary{
+      background:transparent;
+      color:var(--cream);
+      border:1px solid rgba(244,231,211,0.16);
+      transition:all .25s ease;
+    }
+    .btn-secondary:hover{
+      background:rgba(244,231,211,0.08);
+      transform:translateY(-2px);
+    }
+    .muted{color:rgba(244,231,211,0.72)}
+    .nav-link{
+      position:relative;
+      transition:color .25s ease;
+    }
+    .nav-link::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-6px;
+      width:0;
+      height:2px;
+      background:var(--orange);
+      transition:width .25s ease;
+    }
+    .nav-link:hover::after{width:100%}
+    .tag{
+      border:1px solid rgba(244,231,211,0.16);
+      background:rgba(244,231,211,0.08);
+      color:var(--cream);
+    }
+  </style>
+</head>
+<body class="antialiased">
+  <header class="sticky top-0 z-50">
+    <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-4">
+      <div class="glass rounded-2xl px-5 py-4 flex items-center justify-between">
+        <a href="index.html" class="text-xl sm:text-2xl font-black tracking-[0.2em]">NIYANTRA</a>
+        <div class="flex items-center gap-4 sm:gap-8 text-sm sm:text-base">
+          <a href="about.html" class="nav-link">About</a>
+          <a href="features.html" class="nav-link">Features</a>
+          <a id="navGetStarted" href="login.html" class="btn-primary rounded-xl px-4 py-2 font-semibold">Get Started</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 sm:pt-20 pb-20">
+    <section class="mb-12">
+      <p class="uppercase tracking-[0.35em] text-xs sm:text-sm muted">Feature Architecture</p>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.05] mt-4 max-w-5xl">
+        Every feature is designed to reduce chaos and increase exam-focused execution.
+      </h1>
+      <p class="text-lg sm:text-xl muted mt-8 max-w-4xl leading-relaxed">
+        NIYANTRA combines discipline logic, planning, analysis, revision, simulation, and adaptive learning into one premium student workflow.
+      </p>
+    </section>
+
+    <section class="grid lg:grid-cols-2 gap-6">
+      <article class="feature-card rounded-[2rem] p-7 sm:p-8">
+        <div class="flex items-start justify-between gap-4">
+          <h2 class="text-3xl font-black">Discipline Tracker</h2>
+          <span class="px-4 py-2 rounded-full text-sm font-semibold" style="background:rgba(30,111,92,0.16); color:var(--green); border:1px solid rgba(30,111,92,0.24);">Core</span>
+        </div>
+        <p class="mt-5 text-lg leading-relaxed muted">
+          The Discipline Tracker creates visible accountability around study consistency, completion behavior, and routine strength. Instead of depending on mood, the user operates inside a repeatable execution loop.
+        </p>
+        <div class="grid gap-4 mt-6">
+          <div class="rounded-2xl p-4" style="background:rgba(244,231,211,0.08); border:1px solid rgba(244,231,211,0.14);">
+            <p class="text-sm uppercase tracking-[0.2em] muted">Description</p>
+            <p class="mt-2 leading-relaxed">Captures daily study rhythm, tracks continuity, and builds a personal signal of discipline over time.</p>
+          </div>
+          <div class="rounded-2xl p-4" style="background:rgba(242,166,90,0.10); border:1px solid rgba(242,166,90,0.16);">
+            <p class="text-sm uppercase tracking-[0.2em] muted">Use Case</p>
+            <p class="mt-2 leading-relaxed">A student who keeps missing study targets can instantly see inconsistency patterns and rebuild routine with intent.</p>
+          </div>
+          <div class="rounded-2xl p-4" style="background:rgba(30,111,92,0.12); border:1px solid rgba(30,111,92,0.18);">
+            <p class="text-sm uppercase tracking-[0.2em] muted">Exam Relevance</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="tag px-3 py-1 rounded-full text-sm">JEE</span>
+              <span class="tag px-3 py-1 rounded-full text-sm">KCET</span>
+              <span class="tag px-3 py-1 rounded-full text-sm">NEET</span>
+              <span class="tag px-3 py-1 rounded-full text-sm">NDA</span>
+              <span class="tag px-3 py-1 rounded-full text-sm">UPSC</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="feature-card rounded-[2rem] p-7 sm:p-8">
+        <div class="flex items-start justify-between gap-4">
+          <h2 class="text-3xl font-black">Study Planner</h2>
+          <span class="px-4 py-2 rounded-full text-sm font-semibold" style="background:rgba(242,166,90,0.16); color:var(--orange); border:1px solid rgba(242,166,90,0.24);">Planning</span>
+        </div>
+        <p class="mt-5 text-lg leading-relaxed muted">
+          The Study Planner converts broad academic pressure into clear, subject-wise action. It helps students split their workload across classes, streams, and exam targets without wasting time deciding where to begin.
+        </p>
+        <div class="grid gap-4 mt-6">
+          <div class="rounded-2xl p-4" style="background:rgba(244,231,211,0.08); border:1px solid rgba(244,231,211,0.14);">
+            <p class="text-sm uppercase tracking-[0.2em] muted">Description</p>
+            <p class="mt-2 leading-relaxed">Turns syllabus pressure into manageable plans with day-wise direction and chapter-wise execution priority.</p>
+          </div>
+          <div class="rounded-2xl p-4" style="background:rgba(242,166,90,0.10); border:1px solid rgba(242,166,90,0.16);">
+            <p class="text-sm uppercase tracking-[0.2em] muted">Use Case</p>
+            <p class="mt-2 leading-relaxed">A class 12 student balancing board studies and entrance preparation can avoid conflict between school and exam preparation.</p>
+          </div>
+          <div class="rounded-2xl p-4" style="background:rgba(30,111,92,0.12); border:1px solid rgba(30,111,92,0.18);">
+            <p class="text-sm uppercase tracking-[0.2em] muted">Exam Relevance</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="tag px-3 py-1 rounded-full text-sm">JEE</span>
+              <span class="tag px-3 py-1 rounded-full text-sm">KCET</span>
+              <span class="tag px-3 py-1 rounded-full text-sm">NEET</span>
+              <span class="tag px-3 py-1 rounded-full text-sm">NDA</span>
+              <span class="tag px-3 py-1 rounded-full text-sm">UPSC</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="feature-card rounded-[2rem] p-7 sm:p-8">
+        <div class="flex items-start justify-between gap-4">
+          <h2 class="text-3xl font-black">Weakness Detection System</h2>
+          <span class="px-4 py-2 rounded-full text-sm font-semibold" style="background:rgba(196,69,54,0.16); color:var(--red); border:1px solid rgba(196,69,54,0.24);">Critical</span>
+        </div>
+        <p class="mt-5 text-lg leading-relaxed muted">
+          This system identifies low-confidence areas, recurring mistakes, and concept blind spots so students stop wasting effort on random repetition and begin fixing what truly limits scores.
+        </p>
+        <div class="grid gap-4 mt-6">
+          <div class="rounded-2xl p-4" style="background:rgba(244,231,211,0.08); border:1px solid rgba(244,231,211,0.14);">
+            <p class="text-sm uppercase tracking-[0.2em] muted">Description</p>
+            <p class="mt-2 leading-relaxed">Highlights weak chapters, fragile topics, and error clusters that repeatedly reduce performance.</p>
+          </div>
+          <div class="rounded-2xl p-4" style="background:rgba(242,166,90,0.10); border:1px solid rgba(242,166,90,0.16);">
+            <p class="text-sm uppercase tracking-[0.2em] muted">Use Case</p>
+            <p class="mt-2 leading-relaxed">A NEET aspirant struggling with organic chemistry can isolate exact subtopics instead of revising the whole subject blindly.</p>
+          </div>
+          <div class="rounded-2xl p-4" style="background:rgba(30,111,92,0.12); border:1px solid rgba(30,111,92,0.18);">
+            <p class="text-sm uppercase tracking-[0.2em] muted">Exam Relevance</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="tag px-3 py-1 rounded-full text-sm">JEE</span>
+              <span class="tag px-3 py-1 rounded-full text-sm">KCET</span>
+              <span class="tag px-3 py-1 rounded-full text-sm">NEET</span>
+              <span class="tag px-3 py-1 rounded-full text-sm">NDA</span>
+              <span class="tag px-3 py-1 rounded-full text-sm">UPSC</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="feature-card rounded-[2rem] p-7 sm:p-8">
+        <div class="flex items-start justify-between gap-4">
+          <h2 class="text-3xl font-black">Revision Engine</h2>
+          <span class="px-4 py-2 rounded-full text-sm font-semibold" style="background:rgba(244,231,211,0.12); color:var(--cream); border:1px solid rgba(244,231,211,0.20);">Retention</span>
+        </div>
+        <p class="mt-5 text-lg leading-relaxed muted">
+          The Revision Engine keeps important concepts active through structured review cycles. It prevents the common pattern of learning once and forgetting before the exam.
+        </p>
+        <div class="grid gap-4 mt-6">
+          <div class="rounded-2xl p-4" style="background:rgba(244,231,211,0.08); border:1px solid rgba(244,231,211,0.14);">
+            <p class="text-sm uppercase tracking-[0.2em] muted">Description</p>
+            <p class="mt-2 leading-relaxed">Schedules repeated exposure, summary recall, and compressed review to strengthen memory under exam pressure.</p>
+          </div>
+          <div class="rounded-2xl p-4" style="background:rgba(242,166,90,0.10); border:1px solid rgba(242,166,90,0.16);">
+            <p class="text-sm uppercase tracking-[0.2em] muted">Use Case</p>
+            <p class="mt-2 leading-relaxed">A KCET student can keep formulas, reactions, and shortcuts alive while still moving forward with new chapters.</p>
+          </div>
+          <div class="rounded-2xl p-4" style="background:rgba(30,111,92,0.12); border:1px solid rgba(30,111,92,0.18);">
+            <p class="text-sm uppercase tracking-[0.2em] muted">Exam Relevance</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="tag px-3 py-1 rounded-full text-sm">JEE</span>
+              <span class="tag px-3 py-1 rounded-full text-sm">KCET</span>
+              <span class="tag px-3 py-1 rounded-full text-sm">NEET</span>
+              <span class="tag px-3 py-1 rounded-full text-sm">NDA</span>
+              <span class="tag px-3 py-1 rounded-full text-sm">UPSC</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="feature-card rounded-[2rem] p-7 sm:p-8">
+        <div class="flex items-start justify-between gap-4">
+          <h2 class="text-3xl font-black">Exam Simulation Mode</h2>
+          <span class="px-4 py-2 rounded-full text-sm font-semibold" style="background:rgba(196,69,54,0.16); color:var(--red); border:1px solid rgba(196,69,54,0.24);">Pressure Mode</span>
+        </div>
+        <p class="mt-5 text-lg leading-relaxed muted">
+          Exam Simulation Mode builds performance under pressure. It helps students rehearse the pace, decision-making, and mental state required in real assessments rather than studying only in comfortable conditions.
+        </p>
+        <div class="grid gap-4 mt-6">
+          <div class="rounded-2xl p-4" style="background:rgba(244,231,211,0.08); border:1px solid rgba(244,231,211,0.14);">
+            <p class="text-sm uppercase tracking-[0.2em] muted">Description</p>
+            <p class="mt-2 leading-relaxed">Provides test-oriented challenge flow, timing pressure, and self-evaluation structure for sharper execution.</p>
+          </div>
+          <div class="rounded-2xl p-4" style="background:rgba(242,166,90,0.10); border:1px solid rgba(242,166,90,0.16);">
+            <p class="text-sm uppercase tracking-[0.2em] muted">Use Case</p>
+            <p class="mt-2 leading-relaxed">An NDA aspirant can rehearse fast reasoning and composure while staying aligned to exam-style response demands.</p>
+          </div>
+          <div class="rounded-2xl p-4" style="background:rgba(30,111,92,0.12); border:1px solid rgba(30,111,92,0.18);">
+            <p class="text-sm uppercase tracking-[0.2em] muted">Exam Relevance</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="tag px-3 py-1 rounded-full text-sm">JEE</span>
+              <span class="tag px-3 py-1 rounded-full text-sm">KCET</span>
+              <span class="tag px-3 py-1 rounded-full text-sm">NEET</span>
+              <span class="tag px-3 py-1 rounded-full text-sm">NDA</span>
+              <span class="tag px-3 py-1 rounded-full text-sm">UPSC</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="feature-card rounded-[2rem] p-7 sm:p-8">
+        <div class="flex items-start justify-between gap-4">
+          <h2 class="text-3xl font-black">AI Chat Learning Mode</h2>
+          <span class="px-4 py-2 rounded-full text-sm font-semibold" style="background:rgba(30,111,92,0.16); color:var(--green); border:1px solid rgba(30,111,92,0.24);">Adaptive</span>
+        </div>
+        <p class="mt-5 text-lg leading-relaxed muted">
+          This mode creates a guided learning conversation where the student can switch between learning, practice, testing, weakness repair, and revision without leaving the workspace.
+        </p>
+        <div class="grid gap-4 mt-6">
+          <div class="rounded-2xl p-4" style="background:rgba(244,231,211,0.08); border:1px solid rgba(244,231,211,0.14);">
+            <p class="text-sm uppercase tracking-[0.2em] muted">Description</p>
+            <p class="mt-2 leading-relaxed">Adapts the response style based on subject selection, chosen mode, exam target, and the user’s weak topics.</p>
+          </div>
+          <div class="rounded-2xl p-4" style="background:rgba(242,166,90,0.10); border:1px solid rgba(242,166,90,0.16);">
+            <p class="text-sm uppercase tracking-[0.2em] muted">Use Case</p>
+            <p class="mt-2 leading-relaxed">A student can ask for concept teaching in Learn Mode, switch to Practice Mode, then enter Test Mode within the same session.</p>
+          </div>
+          <div class="rounded-2xl p-4" style="background:rgba(30,111,92,0.12); border:1px solid rgba(30,111,92,0.18);">
+            <p class="text-sm uppercase tracking-[0.2em] muted">Exam Relevance</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="tag px-3 py-1 rounded-full text-sm">JEE</span>
+              <span class="tag px-3 py-1 rounded-full text-sm">KCET</span>
+              <span class="tag px-3 py-1 rounded-full text-sm">NEET</span>
+              <span class="tag px-3 py-1 rounded-full text-sm">NDA</span>
+              <span class="tag px-3 py-1 rounded-full text-sm">UPSC</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="pt-12">
+      <div class="feature-card rounded-[2rem] p-8 sm:p-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+        <div>
+          <p class="uppercase tracking-[0.35em] text-xs sm:text-sm muted">Ready to begin</p>
+          <h2 class="text-3xl sm:text-4xl font-black mt-3">Enter the NIYANTRA workspace and build disciplined momentum.</h2>
+        </div>
+        <div class="flex flex-wrap gap-4">
+          <a id="featuresCTA" href="login.html" class="btn-primary rounded-2xl px-6 py-3 font-bold">Get Started</a>
+          <a href="about.html" class="btn-secondary rounded-2xl px-6 py-3 font-semibold">About the Vision</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t" style="border-color:rgba(244,231,211,0.10);">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div>
+        <p class="font-black tracking-[0.18em]">NIYANTRA</p>
+        <p class="muted text-sm mt-1">Execution architecture for ambitious students.</p>
+      </div>
+      <div class="flex gap-6 text-sm">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="login.html" class="nav-link">Login</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const auth = localStorage.getItem("niyantra_auth") === "true";
+    const nav = document.getElementById("navGetStarted");
+    const cta = document.getElementById("featuresCTA");
+    if (auth) {
+      nav.href = "dashboard.html";
+      nav.textContent = "Open App";
+      cta.href = "dashboard.html";
+      cta.textContent = "Open Dashboard";
+    }
+  </script>
+</body>
+</html>
