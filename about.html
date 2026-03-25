@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — NIYANTRA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --navy:#0B1D3A;
+      --grey:#5A6473;
+      --cream:#F4E7D3;
+      --orange:#F2A65A;
+      --red:#C44536;
+      --green:#1E6F5C;
+      --shadow:0 24px 80px rgba(11,29,58,0.45);
+      --border:1px solid rgba(244,231,211,0.12);
+    }
+    body{
+      background:
+        radial-gradient(circle at top right, rgba(242,166,90,0.12), transparent 25%),
+        radial-gradient(circle at left, rgba(30,111,92,0.10), transparent 26%),
+        linear-gradient(180deg, var(--navy) 0%, rgba(11,29,58,0.98) 44%, var(--grey) 100%);
+      color:var(--cream);
+      min-height:100vh;
+    }
+    .glass{
+      background:rgba(90,100,115,0.18);
+      backdrop-filter: blur(18px);
+      border:var(--border);
+      box-shadow:var(--shadow);
+    }
+    .panel{
+      background:linear-gradient(180deg, rgba(90,100,115,0.20), rgba(11,29,58,0.34));
+      border:var(--border);
+      box-shadow:var(--shadow);
+    }
+    .muted{color:rgba(244,231,211,0.72)}
+    .btn-primary{
+      background:var(--orange);
+      color:var(--navy);
+      transition:all .25s ease;
+    }
+    .btn-primary:hover{
+      transform:translateY(-2px);
+      box-shadow:0 14px 28px rgba(242,166,90,0.28);
+    }
+    .btn-secondary{
+      background:transparent;
+      color:var(--cream);
+      border:1px solid rgba(244,231,211,0.16);
+      transition:all .25s ease;
+    }
+    .btn-secondary:hover{
+      background:rgba(244,231,211,0.08);
+      transform:translateY(-2px);
+    }
+    .nav-link{
+      position:relative;
+      transition:color .25s ease;
+    }
+    .nav-link::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-6px;
+      width:0;
+      height:2px;
+      background:var(--orange);
+      transition:width .25s ease;
+    }
+    .nav-link:hover::after{width:100%}
+  </style>
+</head>
+<body class="antialiased">
+  <header class="sticky top-0 z-50">
+    <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-4">
+      <div class="glass rounded-2xl px-5 py-4 flex items-center justify-between">
+        <a href="index.html" class="text-xl sm:text-2xl font-black tracking-[0.2em]">NIYANTRA</a>
+        <div class="flex items-center gap-4 sm:gap-8 text-sm sm:text-base">
+          <a href="about.html" class="nav-link">About</a>
+          <a href="features.html" class="nav-link">Features</a>
+          <a id="navGetStarted" href="login.html" class="btn-primary rounded-xl px-4 py-2 font-semibold">Get Started</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 sm:pt-20 pb-20">
+    <section class="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 items-start">
+      <div>
+        <p class="uppercase tracking-[0.35em] text-xs sm:text-sm muted">About NIYANTRA</p>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.05] mt-4">
+          A serious discipline system for students who want measurable progress.
+        </h1>
+        <p class="text-lg sm:text-xl leading-relaxed muted mt-8 max-w-3xl">
+          NIYANTRA is not built as another motivational platform. It is designed as a structured AI-powered student discipline system that helps learners move from confusion to execution. The purpose is simple: make discipline visible, organize study decisions, expose weaknesses early, and create a focused path toward exam success.
+        </p>
+        <div class="grid sm:grid-cols-2 gap-4 mt-10">
+          <div class="rounded-3xl p-5" style="background:rgba(242,166,90,0.12); border:1px solid rgba(242,166,90,0.18);">
+            <p class="text-xs uppercase tracking-[0.22em] muted">Why it matters</p>
+            <p class="text-2xl font-extrabold mt-2">Potential needs discipline</p>
+            <p class="muted mt-2 leading-relaxed">Strong students often underperform because effort is scattered, not because ability is missing.</p>
+          </div>
+          <div class="rounded-3xl p-5" style="background:rgba(30,111,92,0.12); border:1px solid rgba(30,111,92,0.18);">
+            <p class="text-xs uppercase tracking-[0.22em] muted">What it does</p>
+            <p class="text-2xl font-extrabold mt-2">Turns effort into systems</p>
+            <p class="muted mt-2 leading-relaxed">Plans, revision loops, weakness repair, and exam-style execution are organized in one flow.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel rounded-[2rem] p-8 sm:p-10">
+        <p class="uppercase tracking-[0.35em] text-xs sm:text-sm muted">Vision</p>
+        <h2 class="text-3xl sm:text-4xl font-black mt-4 leading-tight">
+          Build an AI-powered student discipline engine that trains execution, not just intention.
+        </h2>
+        <p class="muted mt-6 leading-relaxed text-lg">
+          NIYANTRA is envisioned as a premium study operating system for learners across school and competitive exam pathways. It combines planning, analysis, revision, and learning guidance in one disciplined environment so students stop drifting between apps, random notes, and inconsistent routines.
+        </p>
+        <div class="space-y-4 mt-8">
+          <div class="rounded-2xl p-4" style="background:rgba(244,231,211,0.08); border:1px solid rgba(244,231,211,0.16);">
+            <h3 class="text-xl font-bold">AI-guided discipline</h3>
+            <p class="muted mt-2">The system should feel like a sharp digital mentor that keeps learning aligned to purpose and timing.</p>
+          </div>
+          <div class="rounded-2xl p-4" style="background:rgba(196,69,54,0.12); border:1px solid rgba(196,69,54,0.18);">
+            <h3 class="text-xl font-bold">Weakness-first improvement</h3>
+            <p class="muted mt-2">Students rise faster when error zones, poor topics, and fragile concepts are made impossible to ignore.</p>
+          </div>
+          <div class="rounded-2xl p-4" style="background:rgba(30,111,92,0.12); border:1px solid rgba(30,111,92,0.18);">
+            <h3 class="text-xl font-bold">Exam-ready execution</h3>
+            <p class="muted mt-2">Whether the target is JEE, KCET, NEET, NDA, or UPSC, the system should always push toward real performance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pt-14 sm:pt-20">
+      <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-8 items-start">
+        <div class="panel rounded-[2rem] p-8">
+          <p class="uppercase tracking-[0.35em] text-xs sm:text-sm muted">Founder</p>
+          <h2 class="text-3xl sm:text-4xl font-black mt-4">Founder Card</h2>
+          <div class="mt-8 rounded-[2rem] p-6" style="background:linear-gradient(180deg, rgba(244,231,211,0.08), rgba(90,100,115,0.18)); border:1px solid rgba(244,231,211,0.16);">
+            <div class="flex items-center gap-4">
+              <div class="h-16 w-16 rounded-2xl flex items-center justify-center text-2xl font-black" style="background:rgba(242,166,90,0.16); color:var(--orange); border:1px solid rgba(242,166,90,0.24);">OM</div>
+              <div>
+                <h3 class="text-2xl font-extrabold">Omkar R Marennavar</h3>
+                <p class="muted mt-1">Class 12 PUC PCM CS Student</p>
+              </div>
+            </div>
+            <div class="grid gap-3 mt-6">
+              <div class="rounded-2xl px-4 py-3" style="background:rgba(244,231,211,0.08); border:1px solid rgba(244,231,211,0.14);">
+                <p class="text-sm uppercase tracking-[0.2em] muted">Academic Path</p>
+                <p class="text-lg font-bold mt-1">PCM + Computer Science</p>
+              </div>
+              <div class="rounded-2xl px-4 py-3" style="background:rgba(30,111,92,0.12); border:1px solid rgba(30,111,92,0.18);">
+                <p class="text-sm uppercase tracking-[0.2em] muted">Aspirational Focus</p>
+                <p class="text-lg font-bold mt-1">NDA Aspirant</p>
+              </div>
+              <div class="rounded-2xl px-4 py-3" style="background:rgba(242,166,90,0.12); border:1px solid rgba(242,166,90,0.18);">
+                <p class="text-sm uppercase tracking-[0.2em] muted">Builder’s Intent</p>
+                <p class="text-lg font-bold mt-1">Create disciplined systems for students who refuse mediocrity.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid gap-5">
+          <div class="panel rounded-3xl p-6">
+            <h3 class="text-2xl font-extrabold">What NIYANTRA stands for</h3>
+            <p class="muted mt-4 leading-relaxed text-lg">
+              NIYANTRA stands for control, direction, and disciplined governance over effort. In the context of student growth, it represents the shift from emotional studying to strategic studying. The platform is designed to help a learner decide what to study, when to revise, where they are weak, and how to recover faster.
+            </p>
+          </div>
+          <div class="panel rounded-3xl p-6">
+            <h3 class="text-2xl font-extrabold">What makes it startup-grade</h3>
+            <p class="muted mt-4 leading-relaxed text-lg">
+              The product is built around a clear system of experience: clean hierarchy, focused navigation, strong typography, and mode-based interaction. Every screen is intended to feel purposeful, premium, and execution-oriented rather than decorative.
+            </p>
+          </div>
+          <div class="panel rounded-3xl p-6">
+            <h3 class="text-2xl font-extrabold">Who it serves</h3>
+            <p class="muted mt-4 leading-relaxed text-lg">
+              Students from class 6 to 12, especially those preparing for JEE, KCET, NEET, NDA, UPSC, and discipline-heavy academic pathways. It is for learners who want structure, not noise.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a id="aboutCTA" href="login.html" class="btn-primary rounded-2xl px-6 py-3 font-bold">Build Your Workflow</a>
+            <a href="features.html" class="btn-secondary rounded-2xl px-6 py-3 font-semibold">View Feature Architecture</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t" style="border-color:rgba(244,231,211,0.10);">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div>
+        <p class="font-black tracking-[0.18em]">NIYANTRA</p>
+        <p class="muted text-sm mt-1">A premium discipline system for serious learners.</p>
+      </div>
+      <div class="flex gap-6 text-sm">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="features.html" class="nav-link">Features</a>
+        <a href="login.html" class="nav-link">Login</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const auth = localStorage.getItem("niyantra_auth") === "true";
+    const nav = document.getElementById("navGetStarted");
+    const cta = document.getElementById("aboutCTA");
+    if (auth) {
+      nav.href = "dashboard.html";
+      nav.textContent = "Open App";
+      cta.href = "dashboard.html";
+      cta.textContent = "Open Dashboard";
+    }
+  </script>
+</body>
+</html>
