@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login / Signup — NIYANTRA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --navy:#0B1D3A;
+      --grey:#5A6473;
+      --cream:#F4E7D3;
+      --orange:#F2A65A;
+      --red:#C44536;
+      --green:#1E6F5C;
+      --shadow:0 24px 80px rgba(11,29,58,0.45);
+      --border:1px solid rgba(244,231,211,0.12);
+    }
+    body{
+      background:
+        radial-gradient(circle at top left, rgba(242,166,90,0.14), transparent 25%),
+        radial-gradient(circle at bottom right, rgba(30,111,92,0.14), transparent 24%),
+        linear-gradient(180deg, var(--navy) 0%, rgba(11,29,58,0.98) 44%, var(--grey) 100%);
+      color:var(--cream);
+      min-height:100vh;
+    }
+    .glass{
+      background:rgba(90,100,115,0.20);
+      backdrop-filter: blur(18px);
+      border:var(--border);
+      box-shadow:var(--shadow);
+    }
+    .btn-primary{
+      background:var(--orange);
+      color:var(--navy);
+      transition:all .25s ease;
+    }
+    .btn-primary:hover{
+      transform:translateY(-2px);
+      box-shadow:0 14px 28px rgba(242,166,90,0.28);
+    }
+    .btn-secondary{
+      background:rgba(244,231,211,0.07);
+      color:var(--cream);
+      border:1px solid rgba(244,231,211,0.16);
+      transition:all .25s ease;
+    }
+    .btn-secondary:hover{
+      background:rgba(244,231,211,0.10);
+      transform:translateY(-2px);
+    }
+    .muted{color:rgba(244,231,211,0.72)}
+    .input{
+      width:100%;
+      background:rgba(244,231,211,0.06);
+      border:1px solid rgba(244,231,211,0.14);
+      color:var(--cream);
+      border-radius:1rem;
+      padding:0.95rem 1rem;
+      outline:none;
+      transition:all .2s ease;
+    }
+    .input::placeholder{color:rgba(244,231,211,0.48)}
+    .input:focus{
+      border-color:rgba(242,166,90,0.38);
+      box-shadow:0 0 0 4px rgba(242,166,90,0.10);
+    }
+    select.input option{
+      background:var(--navy);
+      color:var(--cream);
+    }
+    .status-good{
+      background:rgba(30,111,92,0.12);
+      color:var(--green);
+      border:1px solid rgba(30,111,92,0.20);
+    }
+    .status-warn{
+      background:rgba(196,69,54,0.12);
+      color:var(--red);
+      border:1px solid rgba(196,69,54,0.20);
+    }
+  </style>
+</head>
+<body class="antialiased">
+  <main class="min-h-screen flex items-center justify-center px-4 sm:px-6 py-8">
+    <div class="w-full max-w-6xl grid lg:grid-cols-[0.95fr_1.05fr] gap-8 items-stretch">
+      <section class="glass rounded-[2rem] p-8 sm:p-10 flex flex-col justify-between">
+        <div>
+          <a href="index.html" class="inline-flex items-center gap-3 text-sm font-semibold mb-8 muted hover:opacity-100 opacity-90 transition">
+            <span class="h-8 w-8 rounded-xl flex items-center justify-center" style="background:rgba(244,231,211,0.08); border:1px solid rgba(244,231,211,0.14);">←</span>
+            Back to Home
+          </a>
+          <p class="uppercase tracking-[0.35em] text-xs sm:text-sm muted">Access NIYANTRA</p>
+          <h1 class="text-4xl sm:text-5xl font-black mt-4 leading-[1.05]">
+            Enter the discipline workspace.
+          </h1>
+          <p class="text-lg leading-relaxed muted mt-6 max-w-xl">
+            Create your NIYANTRA profile once. Your class, stream, exam target, and weak zones shape the dashboard experience.
+          </p>
+        </div>
+
+        <div class="grid gap-4 mt-10">
+          <div class="rounded-3xl p-5 status-good">
+            <p class="text-sm uppercase tracking-[0.2em] opacity-80">What gets stored</p>
+            <p class="text-lg font-bold mt-2">Name, class, stream, exam target, weak topic, provider</p>
+          </div>
+          <div class="rounded-3xl p-5" style="background:rgba(242,166,90,0.12); color:var(--orange); border:1px solid rgba(242,166,90,0.20);">
+            <p class="text-sm uppercase tracking-[0.2em] opacity-80">Experience</p>
+            <p class="text-lg font-bold mt-2">Auto-login on revisit with a premium mode-based dashboard</p>
+          </div>
+          <div class="rounded-3xl p-5 status-warn">
+            <p class="text-sm uppercase tracking-[0.2em] opacity-80">Authentication</p>
+            <p class="text-lg font-bold mt-2">Frontend-only localStorage simulation — no backend required</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="glass rounded-[2rem] p-8 sm:p-10">
+        <div class="flex items-start justify-between gap-4 flex-wrap">
+          <div>
+            <p class="uppercase tracking-[0.35em] text-xs sm:text-sm muted">Login / Signup</p>
+            <h2 class="text-3xl sm:text-4xl font-black mt-3">Build your student profile</h2>
+          </div>
+          <a href="features.html" class="btn-secondary rounded-xl px-4 py-2 font-semibold">See Features</a>
+        </div>
+
+        <div id="statusMessage" class="hidden rounded-2xl px-4 py-3 mt-6 text-sm font-semibold"></div>
+
+        <div class="grid sm:grid-cols-2 gap-4 mt-8">
+          <button id="googleBtn" type="button" class="btn-secondary rounded-2xl px-5 py-4 font-semibold text-left">
+            Continue with Google
+            <span class="block text-sm muted mt-1">Quick access with Google-style signup</span>
+          </button>
+          <button id="emailBtn" type="button" class="btn-primary rounded-2xl px-5 py-4 font-bold text-left">
+            Continue with Email
+            <span class="block text-sm mt-1" style="color:rgba(11,29,58,0.72);">Profile-based email-style entry</span>
+          </button>
+        </div>
+
+        <form id="authForm" class="grid gap-4 mt-8">
