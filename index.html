@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NIYANTRA — Discipline Engine for Ambitious Students</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --navy:#0B1D3A;
+      --grey:#5A6473;
+      --cream:#F4E7D3;
+      --orange:#F2A65A;
+      --red:#C44536;
+      --green:#1E6F5C;
+      --shadow:0 24px 80px rgba(11,29,58,0.45);
+      --border:1px solid rgba(244,231,211,0.12);
+    }
+    *{scroll-behavior:smooth}
+    body{
+      background:
+        radial-gradient(circle at top left, rgba(242,166,90,0.14), transparent 28%),
+        radial-gradient(circle at right, rgba(30,111,92,0.12), transparent 25%),
+        linear-gradient(180deg, var(--navy) 0%, rgba(11,29,58,0.98) 48%, var(--grey) 100%);
+      color:var(--cream);
+      min-height:100vh;
+    }
+    .glass{
+      background:rgba(90,100,115,0.18);
+      backdrop-filter: blur(18px);
+      border:var(--border);
+      box-shadow:var(--shadow);
+    }
+    .panel{
+      background:linear-gradient(180deg, rgba(90,100,115,0.22), rgba(11,29,58,0.34));
+      border:var(--border);
+      box-shadow:var(--shadow);
+    }
+    .btn-primary{
+      background:var(--orange);
+      color:var(--navy);
+      transition:all .25s ease;
+    }
+    .btn-primary:hover{
+      transform:translateY(-2px);
+      box-shadow:0 14px 28px rgba(242,166,90,0.28);
+    }
+    .btn-secondary{
+      background:transparent;
+      color:var(--cream);
+      border:1px solid rgba(244,231,211,0.16);
+      transition:all .25s ease;
+    }
+    .btn-secondary:hover{
+      background:rgba(244,231,211,0.08);
+      transform:translateY(-2px);
+    }
+    .feature-card{
+      background:linear-gradient(180deg, rgba(90,100,115,0.18), rgba(11,29,58,0.32));
+      border:var(--border);
+      transition:all .3s ease;
+    }
+    .feature-card:hover{
+      transform:translateY(-6px);
+      border-color:rgba(242,166,90,0.35);
+      box-shadow:0 22px 50px rgba(11,29,58,0.45);
+    }
+    .accent-line{
+      background:linear-gradient(90deg, var(--orange), var(--green));
+      height:2px;
+      width:100%;
+    }
+    .muted{color:rgba(244,231,211,0.72)}
+    .nav-link{
+      position:relative;
+      transition:color .25s ease;
+    }
+    .nav-link::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-6px;
+      width:0;
+      height:2px;
+      background:var(--orange);
+      transition:width .25s ease;
+    }
+    .nav-link:hover::after{width:100%}
+    .quote-mark{color:var(--orange)}
+  </style>
+</head>
+<body class="antialiased">
+  <header class="sticky top-0 z-50">
+    <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-4">
+      <div class="glass rounded-2xl px-5 py-4 flex items-center justify-between">
+        <a href="index.html" class="text-xl sm:text-2xl font-black tracking-[0.2em]">NIYANTRA</a>
+        <div class="flex items-center gap-4 sm:gap-8 text-sm sm:text-base">
+          <a href="about.html" class="nav-link">About</a>
+          <a href="features.html" class="nav-link">Features</a>
+          <a id="navGetStarted" href="login.html" class="btn-primary rounded-xl px-4 py-2 font-semibold">Get Started</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 sm:pt-20 pb-14">
+      <div class="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-center">
+        <div>
+          <p class="uppercase tracking-[0.35em] text-xs sm:text-sm mb-5 muted">AI-powered student discipline system</p>
+          <h1 id="greetingText" class="text-4xl sm:text-5xl lg:text-7xl font-black leading-[1.05] max-w-4xl">
+            Good morning, Builder of discipline.
+          </h1>
+          <div class="accent-line rounded-full my-8 max-w-xl"></div>
+          <p class="text-lg sm:text-xl lg:text-2xl leading-relaxed max-w-3xl muted">
+            NIYANTRA is built for focused students who want structure, consistency, and serious exam execution without chaos.
+          </p>
+          <div class="flex flex-wrap gap-4 mt-10">
+            <a id="heroGetStarted" href="login.html" class="btn-primary rounded-2xl px-6 py-3 font-bold text-base sm:text-lg">Get Started</a>
+            <a href="features.html" class="btn-secondary rounded-2xl px-6 py-3 font-semibold text-base sm:text-lg">Explore Features</a>
+          </div>
+        </div>
+
+        <div class="panel rounded-3xl p-7 sm:p-8">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <p class="text-sm uppercase tracking-[0.28em] muted">Today’s principle</p>
+              <h2 class="text-2xl sm:text-3xl font-extrabold mt-2">Build momentum, not excuses.</h2>
+            </div>
+            <div class="h-12 w-12 rounded-2xl flex items-center justify-center text-2xl font-black" style="background:rgba(242,166,90,0.14); color:var(--orange); border:1px solid rgba(242,166,90,0.25);">
+              N
+            </div>
+          </div>
+
+          <blockquote class="text-center text-xl sm:text-2xl leading-relaxed py-6">
+            <span class="quote-mark text-4xl align-top">“</span>
+            Discipline is choosing what you want most over what you want now.
+            <span class="quote-mark text-4xl align-top">”</span>
+          </blockquote>
+
+          <div class="grid grid-cols-2 gap-4 mt-8">
+            <div class="rounded-2xl p-4" style="background:rgba(30,111,92,0.14); border:1px solid rgba(30,111,92,0.28);">
+              <p class="text-sm uppercase tracking-[0.18em] muted">Focus</p>
+              <p class="text-2xl font-extrabold mt-2">Structured</p>
+            </div>
+            <div class="rounded-2xl p-4" style="background:rgba(242,166,90,0.14); border:1px solid rgba(242,166,90,0.28);">
+              <p class="text-sm uppercase tracking-[0.18em] muted">Execution</p>
+              <p class="text-2xl font-extrabold mt-2">Daily</p>
+            </div>
+            <div class="rounded-2xl p-4" style="background:rgba(196,69,54,0.14); border:1px solid rgba(196,69,54,0.28);">
+              <p class="text-sm uppercase tracking-[0.18em] muted">Weaknesses</p>
+              <p class="text-2xl font-extrabold mt-2">Visible</p>
+            </div>
+            <div class="rounded-2xl p-4" style="background:rgba(244,231,211,0.08); border:1px solid rgba(244,231,211,0.16);">
+              <p class="text-sm uppercase tracking-[0.18em] muted">Learning</p>
+              <p class="text-2xl font-extrabold mt-2">Adaptive</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+      <div class="flex items-end justify-between gap-6 flex-wrap mb-8">
+        <div>
+          <p class="uppercase tracking-[0.35em] text-xs sm:text-sm muted">System preview</p>
+          <h2 class="text-3xl sm:text-4xl font-black mt-3">Core execution layers of NIYANTRA</h2>
+        </div>
+        <a href="features.html" class="btn-secondary rounded-xl px-5 py-3 font-semibold">See Full Breakdown</a>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="feature-card rounded-3xl p-6">
+          <div class="flex items-center justify-between">
+            <h3 class="text-2xl font-extrabold">Discipline Tracker</h3>
+            <span class="text-sm font-semibold px-3 py-1 rounded-full" style="background:rgba(30,111,92,0.16); color:var(--green); border:1px solid rgba(30,111,92,0.25);">Consistency</span>
+          </div>
+          <p class="muted mt-4 leading-relaxed">A visible structure for attendance, effort, study rhythm, and daily accountability.</p>
+        </div>
+
+        <div class="feature-card rounded-3xl p-6">
+          <div class="flex items-center justify-between">
+            <h3 class="text-2xl font-extrabold">Study Planner</h3>
+            <span class="text-sm font-semibold px-3 py-1 rounded-full" style="background:rgba(242,166,90,0.16); color:var(--orange); border:1px solid rgba(242,166,90,0.25);">Planning</span>
+          </div>
+          <p class="muted mt-4 leading-relaxed">Turns big goals into subject-wise, day-wise, revision-first execution plans.</p>
+        </div>
+
+        <div class="feature-card rounded-3xl p-6">
+          <div class="flex items-center justify-between">
+            <h3 class="text-2xl font-extrabold">Weakness Analyzer</h3>
+            <span class="text-sm font-semibold px-3 py-1 rounded-full" style="background:rgba(196,69,54,0.16); color:var(--red); border:1px solid rgba(196,69,54,0.25);">Insight</span>
+          </div>
+          <p class="muted mt-4 leading-relaxed">Detects what is slowing performance and converts weak zones into repair actions.</p>
+        </div>
+
+        <div class="feature-card rounded-3xl p-6">
+          <div class="flex items-center justify-between">
+            <h3 class="text-2xl font-extrabold">Revision System</h3>
+            <span class="text-sm font-semibold px-3 py-1 rounded-full" style="background:rgba(244,231,211,0.12); color:var(--cream); border:1px solid rgba(244,231,211,0.18);">Retention</span>
+          </div>
+          <p class="muted mt-4 leading-relaxed">A disciplined revision loop so concepts stay active instead of fading after one session.</p>
+        </div>
+
+        <div class="feature-card rounded-3xl p-6">
+          <div class="flex items-center justify-between">
+            <h3 class="text-2xl font-extrabold">Exam Simulator</h3>
+            <span class="text-sm font-semibold px-3 py-1 rounded-full" style="background:rgba(196,69,54,0.16); color:var(--red); border:1px solid rgba(196,69,54,0.25);">Pressure</span>
+          </div>
+          <p class="muted mt-4 leading-relaxed">Mirrors exam pressure through guided testing logic, timing, and self-review flow.</p>
+        </div>
+
+        <div class="feature-card rounded-3xl p-6">
+          <div class="flex items-center justify-between">
+            <h3 class="text-2xl font-extrabold">AI Learning Mode</h3>
+            <span class="text-sm font-semibold px-3 py-1 rounded-full" style="background:rgba(30,111,92,0.16); color:var(--green); border:1px solid rgba(30,111,92,0.25);">Adaptive</span>
+          </div>
+          <p class="muted mt-4 leading-relaxed">A guided command-style workspace where learning changes based on mode, subject, and weakness.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-8 pb-20">
+      <div class="panel rounded-[2rem] p-8 sm:p-10 lg:p-12">
+        <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
+          <div>
+            <p class="uppercase tracking-[0.35em] text-xs sm:text-sm muted">Vision</p>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black mt-4 leading-tight">
+              NIYANTRA exists to turn ambition into disciplined execution.
+            </h2>
+            <p class="mt-6 text-lg leading-relaxed muted max-w-3xl">
+              Most students do not fail from lack of potential. They fail because their effort is unstructured, their revision is inconsistent, and their weaknesses stay hidden too long. NIYANTRA is designed as a premium operating layer for focused students who want clarity, routine, and a system that pushes them toward high-stakes exam performance.
+            </p>
+            <div class="flex flex-wrap gap-4 mt-8">
+              <a href="about.html" class="btn-secondary rounded-2xl px-6 py-3 font-semibold">Read the Story</a>
+              <a id="visionGetStarted" href="login.html" class="btn-primary rounded-2xl px-6 py-3 font-bold">Start with NIYANTRA</a>
+            </div>
+          </div>
+
+          <div class="grid gap-4">
+            <div class="rounded-3xl p-5" style="background:rgba(244,231,211,0.08); border:1px solid rgba(244,231,211,0.16);">
+              <p class="uppercase tracking-[0.18em] text-xs muted">01</p>
+              <h3 class="text-2xl font-bold mt-2">Discipline before motivation</h3>
+              <p class="muted mt-2 leading-relaxed">The system rewards routine, rhythm, and consistency—not random bursts of energy.</p>
+            </div>
+            <div class="rounded-3xl p-5" style="background:rgba(242,166,90,0.10); border:1px solid rgba(242,166,90,0.18);">
+              <p class="uppercase tracking-[0.18em] text-xs muted">02</p>
+              <h3 class="text-2xl font-bold mt-2">Weakness exposed early</h3>
+              <p class="muted mt-2 leading-relaxed">Students improve faster when poor topics, low-confidence chapters, and error patterns are visible.</p>
+            </div>
+            <div class="rounded-3xl p-5" style="background:rgba(30,111,92,0.12); border:1px solid rgba(30,111,92,0.18);">
+              <p class="uppercase tracking-[0.18em] text-xs muted">03</p>
+              <h3 class="text-2xl font-bold mt-2">Exam-first decision making</h3>
+              <p class="muted mt-2 leading-relaxed">Every action is aligned to practical exam execution across JEE, KCET, NEET, NDA, and more.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t" style="border-color:rgba(244,231,211,0.10);">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div>
+        <p class="font-black tracking-[0.18em]">NIYANTRA</p>
+        <p class="muted text-sm mt-1">Built for disciplined learners with serious intent.</p>
+      </div>
+      <div class="flex gap-6 text-sm">
+        <a href="about.html" class="nav-link">About</a>
+        <a href="features.html" class="nav-link">Features</a>
+        <a href="login.html" class="nav-link">Login</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const auth = localStorage.getItem("niyantra_auth") === "true";
+    const startedLinks = ["navGetStarted", "heroGetStarted", "visionGetStarted"];
+    startedLinks.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (auth) {
+        el.href = "dashboard.html";
+        el.textContent = id === "navGetStarted" ? "Open App" : "Open Dashboard";
+      }
+    });
+
+    const hour = new Date().getHours();
+    const greeting = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
+    document.getElementById("greetingText").textContent = `${greeting}, Builder of discipline.`;
+  </script>
+</body>
+</html>
