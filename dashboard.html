@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NIYANTRA Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --navy:#0B1D3A;
+      --grey:#5A6473;
+      --cream:#F4E7D3;
+      --orange:#F2A65A;
+      --red:#C44536;
+      --green:#1E6F5C;
+      --border:1px solid rgba(244,231,211,0.12);
+      --shadow:0 24px 80px rgba(11,29,58,0.42);
+    }
+
+    *{scroll-behavior:smooth}
+    body{
+      background:
+        radial-gradient(circle at top left, rgba(242,166,90,0.10), transparent 24%),
+        radial-gradient(circle at bottom right, rgba(30,111,92,0.10), transparent 26%),
+        linear-gradient(180deg, var(--navy) 0%, rgba(11,29,58,0.98) 52%, var(--grey) 100%);
+      color:var(--cream);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    .glass{
+      background:rgba(90,100,115,0.16);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border:var(--border);
+      box-shadow:var(--shadow);
+    }
+
+    .panel{
+      background:linear-gradient(180deg, rgba(90,100,115,0.18), rgba(11,29,58,0.34));
+      border:var(--border);
+      box-shadow:var(--shadow);
+    }
+
+    .soft-panel{
+      background:rgba(244,231,211,0.05);
+      border:1px solid rgba(244,231,211,0.10);
+    }
+
+    .btn-primary{
+      background:var(--orange);
+      color:var(--navy);
+      transition:all .25s ease;
+    }
+    .btn-primary:hover{
+      transform:translateY(-2px);
+      box-shadow:0 14px 28px rgba(242,166,90,0.22);
+    }
+
+    .btn-secondary{
+      background:rgba(244,231,211,0.06);
+      color:var(--cream);
+      border:1px solid rgba(244,231,211,0.14);
+      transition:all .25s ease;
+    }
+    .btn-secondary:hover{
+      transform:translateY(-2px);
+      background:rgba(244,231,211,0.10);
+    }
+
+    .input{
+      width:100%;
+      background:rgba(244,231,211,0.06);
+      border:1px solid rgba(244,231,211,0.14);
+      color:var(--cream);
+      border-radius:1rem;
+      padding:0.95rem 1rem;
+      outline:none;
+      transition:all .2s ease;
+    }
+    .input::placeholder{color:rgba(244,231,211,0.48)}
+    .input:focus{
+      border-color:rgba(242,166,90,0.38);
+      box-shadow:0 0 0 4px rgba(242,166,90,0.10);
+    }
+
+    .muted{color:rgba(244,231,211,0.72)}
+    .tiny{color:rgba(244,231,211,0.58)}
+
+    .sidebar{
+      transition:transform .28s ease;
+    }
+
+    .overlay{
+      background:rgba(11,29,58,0.68);
+      transition:opacity .25s ease;
+    }
+
+    .subject-item,
+    .mode-card{
+      transition:all .25s ease;
+    }
+
+    .subject-item:hover,
+    .mode-card:hover{
+      transform:translateY(-2px);
+    }
+
+    .subject-item.active{
+      background:rgba(242,166,90,0.14);
+      border-color:rgba(242,166,90,0.24);
+      color:var(--cream);
+    }
+
+    .mode-card.active{
+      border-color:rgba(242,166,90,0.26);
+      background:linear-gradient(180deg, rgba(242,166,90,0.12), rgba(90,100,115,0.14));
+      box-shadow:0 16px 36px rgba(11,29,58,0.28);
+    }
+
+    .message{
+      animation:fadeIn .28s ease;
+    }
+
+    @keyframes fadeIn{
+      from{opacity:0; transform:translateY(10px)}
+      to{opacity:1; transform:translateY(0)}
+    }
+
+    .scrollbar-hide::-webkit-scrollbar{width:8px;height:8px}
+    .scrollbar-hide::-webkit-scrollbar-thumb{
+      background:rgba(244,231,211,0.12);
+      border-radius:999px;
+    }
+    .scrollbar-hide::-webkit-scrollbar-track{
+      background:transparent;
+    }
+
+    .status-success{
+      background:rgba(30,111,92,0.12);
+      border:1px solid rgba(30,111,92,0.18);
+      color:var(--green);
+    }
+
+    .status-warning{
+      background:rgba(196,69,54,0.12);
+      border:1px solid rgba(196,69,54,0.18);
+      color:var(--red);
+    }
+
+    .status-accent{
+      background:rgba(242,166,90,0.12);
+      border:1px solid rgba(242,166,90,0.18);
+      color:var(--orange);
+    }
+
+    .top-blur{
+      background:linear-gradient(180deg, rgba(11,29,58,0.94), rgba(11,29,58,0.80));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .line-clamp-2{
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+  </style>
+</head>
+<body class="antialiased">
+  <div id="appShell" class="min-h-screen">
+    <div id="sidebarOverlay" class="overlay fixed inset-0 z-40 opacity-0 pointer-events-none"></div>
+
+    <aside id="sidebar" class="sidebar fixed top-0 left-0 z-50 h-full w-[290px] max-w-[85vw] -translate-x-full lg:translate-x-0 lg:z-30 glass border-r rounded-r-[2rem] lg:rounded-none lg:rounded-r-[2rem]">
+      <div class="h-full flex flex-col">
+        <div class="px-5 py-5 border-b" style="border-color:rgba(244,231,211,0.10);">
+          <div class="flex items-center justify-between gap-3">
+            <a href="index.html" class="text-xl font-black tracking-[0.2em]">NIYANTRA</a>
+            <button id="closeSidebarBtn" class="lg:hidden btn-secondary rounded-xl px-3 py-2 text-sm font-semibold">Close</button>
+          </div>
+          <p class="muted text-sm mt-3">Your disciplined learning workspace.</p>
+        </div>
+
+        <div class="px-5 pt-5">
+          <p class="uppercase tracking-[0.28em] text-xs tiny">Subjects</p>
+        </div>
+
+        <div id="subjectList" class="px-4 py-4 space-y-3 overflow-y-auto scrollbar-hide">
+          <button class="subject-item active w-full text-left rounded-2xl px-4 py-4 soft-panel border" data-subject="Physics">
+            <div class="flex items-center justify-between gap-3">
+              <div>
+                <p class="font-bold text-lg">Physics</p>
+                <p class="tiny text-sm mt-1">Concepts, numericals, laws</p>
+              </div>
+              <span class="status-success rounded-full px-3 py-1 text-xs font-bold">Core</span>
+            </div>
+          </button>
+
+          <button class="subject-item w-full text-left rounded-2xl px-4 py-4 soft-panel border" data-subject="Chemistry">
+            <div class="flex items-center justify-between gap-3">
+              <div>
+                <p class="font-bold text-lg">Chemistry</p>
+                <p class="tiny text-sm mt-1">Physical, organic, inorganic</p>
+              </div>
+              <span class="status-accent rounded-full px-3 py-1 text-xs font-bold">Focus</span>
+            </div>
+          </button>
+
+          <button class="subject-item w-full text-left rounded-2xl px-4 py-4 soft-panel border" data-subject="Biology">
+            <div class="flex items-center justify-between gap-3">
+              <div>
+                <p class="font-bold text-lg">Biology</p>
+                <p class="tiny text-sm mt-1">Diagrams, cycles, recall</p>
+              </div>
+              <span class="status-success rounded-full px-3 py-1 text-xs font-bold">Memory</span>
+            </div>
+          </button>
+
+          <button class="subject-item w-full text-left rounded-2xl px-4 py-4 soft-panel border" data-subject="Mathematics">
+            <div class="flex items-center justify-between gap-3">
+              <div>
+                <p class="font-bold text-lg">Mathematics</p>
+                <p class="tiny text-sm mt-1">Practice, proofs, speed</p>
+              </div>
+              <span class="status-accent rounded-full px-3 py-1 text-xs font-bold">Drill</span>
+            </div>
+          </button>
+
+          <button class="subject-item w-full text-left rounded-2xl px-4 py-4 soft-panel border" data-subject="Computer Science">
+            <div class="flex items-center justify-between gap-3">
+              <div>
+                <p class="font-bold text-lg">Computer Science</p>
+                <p class="tiny text-sm mt-1">Logic, syntax, structure</p>
+              </div>
+              <span class="status-success rounded-full px-3 py-1 text-xs font-bold">Logic</span>
+            </div>
+          </button>
+
+          <button class="subject-item w-full text-left rounded-2xl px-4 py-4 soft-panel border" data-subject="English">
+            <div class="flex items-center justify-between gap-3">
+              <div>
+                <p class="font-bold text-lg">English</p>
+                <p class="tiny text-sm mt-1">Reading, writing, clarity</p>
+              </div>
+              <span class="status-accent rounded-full px-3 py-1 text-xs font-bold">Language</span>
+            </div>
+          </button>
+        </div>
+
+        <div class="mt-auto p-4">
+          <div class="panel rounded-3xl p-4">
+            <p class="uppercase tracking-[0.24em] text-xs tiny">Active focus</p>
+            <p id="sidebarWeakTopic" class="font-bold text-lg mt-2 line-clamp-2">Weak topic not set</p>
+            <p class="muted text-sm mt-2">NIYANTRA keeps this visible so your weak area gets repaired before it becomes a bigger problem.</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="lg:pl-[290px] min-h-screen flex flex-col">
+      <header class="sticky top-0 z-30 top-blur border-b" style="border-color:rgba(244,231,211,0.08);">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 py-4">
+          <div class="glass rounded-[1.6rem] p-4 sm:p-5">
+            <div class="flex flex-col gap-4">
+              <div class="flex items-center justify-between gap-4 flex-wrap">
+                <div class="flex items-center gap-3 flex-wrap">
+                  <button id="openSidebarBtn" class="btn-secondary rounded-xl px-4 py-2 font-semibold">Subjects</button>
+                  <div class="rounded-xl px-4 py-2 status-accent text-sm font-bold">
+                    <span id="currentSubjectChip">Physics</span>
+                  </div>
+                  <div class="rounded-xl px-4 py-2 status-success text-sm font-bold">
+                    <span id="currentModeChip">Learn Mode</span>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-3 flex-wrap">
+                  <div class="text-right">
+                    <p class="tiny text-xs uppercase tracking-[0.22em]">Logged in as</p>
+                    <p id="topUserName" class="font-bold text-base">Student</p>
+                  </div>
+                  <button id="logoutBtn" class="btn-secondary rounded-xl px-4 py-2 font-semibold">Logout</button>
+                </div>
+              </div>
+
+              <div class="grid lg:grid-cols-[1fr_auto] gap-3 items-center">
+                <div class="relative">
+                  <input id="commandInput" class="input pr-32 sm:pr-36" type="text" placeholder="Ask NIYANTRA to teach, quiz, revise, or fix a weak topic..." />
+                  <button id="sendBtn" class="btn-primary rounded-xl px-4 sm:px-5 py-2.5 font-bold absolute right-2 top-1/2 -translate-y-1/2">
+                    Send
+                  </button>
+                </div>
+
+                <button id="toggleSubjectBarBtn" class="btn-secondary rounded-2xl px-5 py-3 font-semibold">
+                  Subject Selector
+                </button>
+              </div>
+
+              <div id="subjectQuickBar" class="hidden">
+                <div class="flex gap-3 overflow-x-auto scrollbar-hide pt-1">
+                  <button class="quick-subject btn-secondary rounded-xl px-4 py-2 whitespace-nowrap font-semibold" data-subject="Physics">Physics</button>
+                  <button class="quick-subject btn-secondary rounded-xl px-4 py-2 whitespace-nowrap font-semibold" data-subject="Chemistry">Chemistry</button>
+                  <button class="quick-subject btn-secondary rounded-xl px-4 py-2 whitespace-nowrap font-semibold" data-subject="Biology">Biology</button>
+                  <button class="quick-subject btn-secondary rounded-xl px-4 py-2 whitespace-nowrap font-semibold" data-subject="Mathematics">Mathematics</button>
+                  <button class="quick-subject btn-secondary rounded-xl px-4 py-2 whitespace-nowrap font-semibold" data-subject="Computer Science">Computer Science</button>
+                  <button class="quick-subject btn-secondary rounded-xl px-4 py-2 whitespace-nowrap font-semibold" data-subject="English">English</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="flex-1">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 py-6 sm:py-8">
+          <section class="grid xl:grid-cols-[1.2fr_0.8fr] gap-6 mb-6">
+            <div class="panel rounded-[2rem] p-5 sm:p-6">
+              <div class="flex items-start justify-between gap-4 flex-wrap">
+                <div>
+                  <p class="uppercase tracking-[0.28em] text-xs tiny">Command workspace</p>
+                  <h1 class="text-3xl sm:text-4xl font-black mt-2">Welcome back, <span id="heroUserName">Student</span>.</h1>
+                  <p id="heroSubtext" class="muted text-base sm:text-lg mt-3 max-w-3xl">
+                    Your dashboard is ready with focused learning, weakness repair, and exam-aligned study flow.
+                  </p>
+                </div>
+                <div class="rounded-2xl px-4 py-3 soft-panel">
+                  <p class="tiny text-xs uppercase tracking-[0.22em]">Exam target</p>
+                  <p id="examTargetBadge" class="text-lg font-black mt-1">Not set</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel rounded-[2rem] p-5 sm:p-6 grid sm:grid-cols-3 xl:grid-cols-1 gap-4">
+              <div class="rounded-2xl p-4 status-success">
+                <p class="text-xs uppercase tracking-[0.22em] opacity-80">Class</p>
+                <p id="classInfo" class="text-xl font-black mt-2">—</p>
+              </div>
+              <div class="rounded-2xl p-4 status-accent">
+                <p class="text-xs uppercase tracking-[0.22em] opacity-80">Stream</p>
+                <p id="streamInfo" class="text-xl font-black mt-2">—</p>
+              </div>
+              <div class="rounded-2xl p-4 status-warning">
+                <p class="text-xs uppercase tracking-[0.22em] opacity-80">Weak zone</p>
+                <p id="weakTopicInfo" class="text-xl font-black mt-2 line-clamp-2">—</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel rounded-[2rem] p-4 sm:p-5 min-h-[420px] sm:min-h-[520px] flex flex-col">
+            <div class="flex items-center justify-between gap-4 flex-wrap pb-4 border-b" style="border-color:rgba(244,231,211,0.08);">
+              <div>
+                <p class="uppercase tracking-[0.28em] text-xs tiny">AI learning simulation</p>
+                <h2 class="text-2xl sm:text-3xl font-black mt-2">Response Area</h2>
+              </div>
+              <button id="clearChatBtn" class="btn-secondary rounded-xl px-4 py-2 font-semibold">Clear Session</button>
+            </div>
+
+            <div id="chatArea" class="flex-1 overflow-y-auto scrollbar-hide py-5 space-y-4"></div>
+          </section>
+
+          <section class="mt-6">
+            <div class="flex items-end justify-between gap-4 flex-wrap mb-4">
+              <div>
+                <p class="uppercase tracking-[0.28em] text-xs tiny">Modes</p>
+                <h3 class="text-2xl sm:text-3xl font-black mt-2">Choose how NIYANTRA should respond</h3>
+              </div>
+              <p class="muted text-sm max-w-xl">
+                Each mode changes the learning behavior, tone, and output structure using frontend simulation logic.
+              </p>
+            </div>
+
+            <div id="modeGrid" class="grid sm:grid-cols-2 xl:grid-cols-5 gap-4">
+              <button class="mode-card active text-left rounded-[1.6rem] p-5 soft-panel border" data-mode="Learn Mode">
+                <p class="text-xl font-black">Learn Mode</p>
+                <p class="muted text-sm mt-2">Concept explanation, structured teaching, clarity-first response.</p>
+              </button>
+
+              <button class="mode-card text-left rounded-[1.6rem] p-5 soft-panel border" data-mode="Practice Mode">
+                <p class="text-xl font-black">Practice Mode</p>
+                <p class="muted text-sm mt-2">Guided drills, step prompts, active recall and repetition flow.</p>
+              </button>
+
+              <button class="mode-card text-left rounded-[1.6rem] p-5 soft-panel border" data-mode="Test Mode">
+                <p class="text-xl font-black">Test Mode</p>
+                <p class="muted text-sm mt-2">Exam-like questioning, stricter pressure, faster answer checking feel.</p>
+              </button>
+
+              <button class="mode-card text-left rounded-[1.6rem] p-5 soft-panel border" data-mode="Weakness Fix Mode">
+                <p class="text-xl font-black">Weakness Fix Mode</p>
+                <p class="muted text-sm mt-2">Repair weak topics with targeted explanation, correction, and repetition.</p>
+              </button>
+
+              <button class="mode-card text-left rounded-[1.6rem] p-5 soft-panel border" data-mode="Revision Mode">
+                <p class="text-xl font-black">Revision Mode</p>
+                <p class="muted text-sm mt-2">Condensed memory refresh, checkpoints, formula/idea recall flow.</p>
+              </button>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const AUTH_KEY = "niyantra_auth";
+    const USER_KEY = "niyantra_user";
+    const ALT_USER_KEY = "niyantraUser";
+    const CHAT_KEY = "niyantra_chat_history";
+    const MODE_KEY = "niyantra_mode";
+    const SUBJECT_KEY = "niyantra_subject";
+
+    const isAuthed = localStorage.getItem(AUTH_KEY) === "true";
+    if (!isAuthed) {
+      window.location.href = "login.html";
+    }
+
+    const defaultUser = {
+      name: "Student",
+      class: "Class 12",
+      stream: "PCM",
+      examTarget: "NDA",
+      weakTopic: "Not provided",
+      provider: "Email"
+    };
+
+    let user = defaultUser;
+    try {
+      user = JSON.parse(localStorage.getItem(USER_KEY)) || JSON.parse(localStorage.getItem(ALT_USER_KEY)) || defaultUser;
+    } catch (e) {
+      user = defaultUser;
+    }
+
+    const state = {
+      subject: localStorage.getItem(SUBJECT_KEY) || "Physics",
+      mode: localStorage.getItem(MODE_KEY) || "Learn Mode",
+      chat: []
+    };
+
+    try {
+      state.chat = JSON.parse(localStorage.getItem(CHAT_KEY)) || [];
+    } catch (e) {
+      state.chat = [];
+    }
+
+    const sidebar = document.getElementById("sidebar");
+    const sidebarOverlay = document.getElementById("sidebarOverlay");
+    const openSidebarBtn = document.getElementById("openSidebarBtn");
+    const closeSidebarBtn = document.getElementById("closeSidebarBtn");
+    const commandInput = document.getElementById("commandInput");
+    const sendBtn = document.getElementById("sendBtn");
+    const chatArea = document.getElementById("chatArea");
+    const clearChatBtn = document.getElementById("clearChatBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const currentSubjectChip = document.getElementById("currentSubjectChip");
+    const currentModeChip = document.getElementById("currentModeChip");
+    const modeCards = Array.from(document.querySelectorAll(".mode-card"));
+    const subjectItems = Array.from(document.querySelectorAll(".subject-item"));
+    const quickSubjects = Array.from(document.querySelectorAll(".quick-subject"));
+    const toggleSubjectBarBtn = document.getElementById("toggleSubjectBarBtn");
+    const subjectQuickBar = document.getElementById("subjectQuickBar");
+
+    const topUserName = document.getElementById("topUserName");
+    const heroUserName = document.getElementById("heroUserName");
+    const heroSubtext = document.getElementById("heroSubtext");
+    const examTargetBadge = document.getElementById("examTargetBadge");
+    const classInfo = document.getElementById("classInfo");
+    const streamInfo = document.getElementById("streamInfo");
+    const weakTopicInfo = document.getElementById("weakTopicInfo");
+    const sidebarWeakTopic = document.getElementById("sidebarWeakTopic");
+
+    function sanitize(text) {
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function openSidebar() {
+      sidebar.classList.remove("-translate-x-full");
+      sidebarOverlay.classList.remove("opacity-0", "pointer-events-none");
+      sidebarOverlay.classList.add("opacity-100");
+    }
+
+    function closeSidebar() {
+      if (window.innerWidth >= 1024) return;
+      sidebar.classList.add("-translate-x-full");
+      sidebarOverlay.classList.add("opacity-0", "pointer-events-none");
+      sidebarOverlay.classList.remove("opacity-100");
+    }
+
+    function syncResponsiveSidebar() {
+      if (window.innerWidth >= 1024) {
+        sidebar.classList.remove("-translate-x-full");
+        sidebarOverlay.classList.add("opacity-0", "pointer-events-none");
+        sidebarOverlay.classList.remove("opacity-100");
+      } else {
+        sidebar.classList.add("-translate-x-full");
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(CHAT_KEY, JSON.stringify(state.chat));
+      localStorage.setItem(MODE_KEY, state.mode);
+      localStorage.setItem(SUBJECT_KEY, state.subject);
+    }
+
+    function setMode(mode) {
+      state.mode = mode;
+      currentModeChip.textContent = mode;
+      modeCards.forEach(card => {
+        card.classList.toggle("active", card.dataset.mode === mode);
+      });
+      saveState();
+    }
+
+    function setSubject(subject) {
+      state.subject = subject;
+      currentSubjectChip.textContent = subject;
+      subjectItems.forEach(item => {
+        item.classList.toggle("active", item.dataset.subject === subject);
+      });
+      quickSubjects.forEach(item => {
+        if (item.dataset.subject === subject) {
+          item.style.background = "rgba(242,166,90,0.14)";
+          item.style.borderColor = "rgba(242,166,90,0.24)";
+          item.style.color = "var(--cream)";
+        } else {
+          item.style.background = "rgba(244,231,211,0.06)";
+          item.style.borderColor = "rgba(244,231,211,0.14)";
+          item.style.color = "var(--cream)";
+        }
+      });
+      saveState();
+    }
+
+    function renderMessage(message) {
+      const wrapper = document.createElement("div");
+      wrapper.className = "message";
+
+      const isUser = message.role === "user";
+      const alignClass = isUser ? "justify-end" : "justify-start";
+      const bubbleBg = isUser
+        ? "background:rgba(242,166,90,0.14); border:1px solid rgba(242,166,90,0.20);"
+        : "background:rgba(244,231,211,0.06); border:1px solid rgba(244,231,211,0.10);";
+      const metaText = isUser ? "You" : "NIYANTRA";
+
+      wrapper.innerHTML = `
+        <div class="flex ${alignClass}">
+          <div class="max-w-[92%] sm:max-w-[80%] rounded-[1.5rem] p-4 sm:p-5" style="${bubbleBg}">
+            <div class="flex items-center justify-between gap-4 mb-3">
+              <p class="text-sm font-bold tracking-[0.08em]">${metaText}</p>
+              <p class="tiny text-xs">${sanitize(message.meta || "")}</p>
+            </div>
+            <div class="leading-relaxed text-[15px] sm:text-base">${message.content}</div>
+          </div>
+        </div>
+      `;
+      chatArea.appendChild(wrapper);
+      chatArea.scrollTop = chatArea.scrollHeight;
+    }
+
+    function renderAllMessages() {
+      chatArea.innerHTML = "";
+      state.chat.forEach(renderMessage);
+    }
+
+    function addMessage(role, content, meta = "") {
+      const message = { role, content, meta };
+      state.chat.push(message);
+      saveState();
+      renderMessage(message);
+    }
+
+    function getExamTone() {
+      const exam = (user.examTarget || "").toUpperCase();
+      if (exam.includes("JEE")) return "Keep the rigor high and show efficient problem-solving patterns.";
+      if (exam.includes("NEET")) return "Prioritize accuracy, recall retention, and concept precision.";
+      if (exam.includes("KCET")) return "Keep the response concise, syllabus-aware, and scoring-oriented.";
+      if (exam.includes("NDA")) return "Balance clarity, speed, and disciplined thinking under pressure.";
+      if (exam.includes("UPSC")) return "Focus on layered understanding, retention, and structured articulation.";
+      return "Stay exam-relevant and execution-focused.";
+    }
+
+    function buildAIResponse(query) {
+      const weak = user.weakTopic || "your identified weak topic";
+      const exam = user.examTarget || "your exam target";
+      const stream = user.stream || "your stream";
+      const cls = user.class || "your class";
+      const subject = state.subject;
+      const mode = state.mode;
+      const cleanQuery = query.trim();
+
+      const headers = {
+        "Learn Mode": "Structured Learning Response",
+        "Practice Mode": "Active Practice Response",
+        "Test Mode": "Exam Simulation Response",
+        "Weakness Fix Mode": "Weakness Repair Response",
+        "Revision Mode": "Revision Compression Response"
+      };
+
+      const modeBody = {
+        "Learn Mode": `
+          <p><strong>Topic request:</strong> ${sanitize(cleanQuery)}</p>
+          <p class="mt-3"><strong>How NIYANTRA will teach this in ${sanitize(subject)}:</strong> start from the core idea, connect it to one exam-relevant interpretation, then reduce it into a short memory anchor.</p>
+          <div class="mt-4 space-y-2">
+            <p><strong>1. Core concept:</strong> understand the principle behind ${sanitize(cleanQuery)} instead of memorizing it blindly.</p>
+            <p><strong>2. Why it matters:</strong> in ${sanitize(exam)}, questions usually reward clarity plus correct application, not superficial familiarity.</p>
+            <p><strong>3. Execution advice:</strong> after learning the idea, solve 3-5 targeted examples in ${sanitize(subject)} and note one confusion point immediately.</p>
+            <p><strong>4. Memory anchor:</strong> compress the topic into one definition, one trigger idea, and one common mistake to avoid.</p>
+          </div>
+        `,
+        "Practice Mode": `
+          <p><strong>Practice target:</strong> ${sanitize(cleanQuery)}</p>
+          <p class="mt-3"><strong>Drill sequence:</strong> NIYANTRA shifts from explanation to action.</p>
+          <div class="mt-4 space-y-2">
+            <p><strong>Step 1:</strong> solve one easy prompt on ${sanitize(cleanQuery)} to warm up.</p>
+            <p><strong>Step 2:</strong> attempt one medium question without looking at notes.</p>
+            <p><strong>Step 3:</strong> explain your method aloud in one minute.</p>
+            <p><strong>Step 4:</strong> mark whether your issue was concept, speed, formula recall, or careless error.</p>
+            <p><strong>Step 5:</strong> repeat one more question with corrected thinking.</p>
+          </div>
+        `,
+        "Test Mode": `
+          <p><strong>Test focus:</strong> ${sanitize(cleanQuery)}</p>
+          <p class="mt-3"><strong>Simulation style:</strong> respond as if the clock is running and answer decisively.</p>
+          <div class="mt-4 space-y-2">
+            <p><strong>Question pattern:</strong> expect a direct application question from ${sanitize(subject)} linked to ${sanitize(cleanQuery)}.</p>
+            <p><strong>Pressure rule:</strong> do not overthink the first step. Identify the governing idea immediately.</p>
+            <p><strong>Accuracy rule:</strong> if stuck beyond one minute, mark the exact block—concept gap, calculation issue, or memory failure.</p>
+            <p><strong>Post-test check:</strong> review why the right path works, not only which answer is right.</p>
+          </div>
+        `,
+        "Weakness Fix Mode": `
+          <p><strong>Repair request:</strong> ${sanitize(cleanQuery)}</p>
+          <p class="mt-3"><strong>Weakness priority:</strong> your stored weak zone is <strong>${sanitize(weak)}</strong>, so NIYANTRA treats this as a correction mission rather than normal study.</p>
+          <div class="mt-4 space-y-2">
+            <p><strong>Root cause check:</strong> identify whether the issue is weak basics, low repetition, confusion between similar ideas, or lack of exam practice.</p>
+            <p><strong>Fix method:</strong> relearn only the minimum concept required, then apply it to two tightly related questions.</p>
+            <p><strong>Error shield:</strong> write one line on the mistake you keep repeating and keep it visible during the next practice cycle.</p>
+            <p><strong>Recovery loop:</strong> revisit the topic again within 24 hours and once more within 3 days.</p>
+          </div>
+        `,
+        "Revision Mode": `
+          <p><strong>Revision request:</strong> ${sanitize(cleanQuery)}</p>
+          <p class="mt-3"><strong>Compression logic:</strong> revise for retention, not for decoration.</p>
+          <div class="mt-4 space-y-2">
+            <p><strong>Quick pass:</strong> recall the core formula, definition, law, or framework behind ${sanitize(cleanQuery)}.</p>
+            <p><strong>Trigger recall:</strong> ask yourself what kind of question usually activates this topic in ${sanitize(exam)}.</p>
+            <p><strong>Weak point check:</strong> compare this with your weak zone <strong>${sanitize(weak)}</strong> and see whether the same pattern of confusion appears here too.</p>
+            <p><strong>Retention move:</strong> end revision with one self-made mini question and answer it from memory.</p>
+          </div>
+        `
+      };
+
+      return `
+        <div>
+          <p class="font-black text-lg sm:text-xl">${headers[mode]}</p>
+          <p class="tiny text-xs uppercase tracking-[0.18em] mt-1">${sanitize(subject)} • ${sanitize(mode)} • ${sanitize(exam)}</p>
+          <div class="mt-4">
+            ${modeBody[mode]}
+          </div>
+          <div class="mt-5 rounded-2xl p-4" style="background:rgba(30,111,92,0.10); border:1px solid rgba(30,111,92,0.16);">
+            <p class="text-sm font-bold" style="color:var(--green);">NIYANTRA Guidance</p>
+            <p class="mt-2">You are in <strong>${sanitize(cls)}</strong>, following <strong>${sanitize(stream)}</strong>, and preparing for <strong>${sanitize(exam)}</strong>. ${sanitize(getExamTone())}</p>
+          </div>
+        </div>
+      `;
+    }
+
+    function sendQuery() {
+      const query = commandInput.value.trim();
+      if (!query) return;
+
+      addMessage("user", `<p>${sanitize(query)}</p>`, `${state.subject} • ${state.mode}`);
+
+      const response = buildAIResponse(query);
+      setTimeout(() => {
+        addMessage("assistant", response, `${state.subject} • ${state.mode}`);
+      }, 220);
+
+      commandInput.value = "";
+    }
+
+    function seedWelcomeIfNeeded() {
+      if (state.chat.length > 0) {
+        renderAllMessages();
+        return;
+      }
+
+      const welcome = `
+        <div>
+          <p class="font-black text-lg sm:text-xl">Welcome to NIYANTRA</p>
+          <p class="mt-3">Hello <strong>${sanitize(user.name || "Student")}</strong>. Your dashboard is configured for <strong>${sanitize(user.examTarget || "your exam target")}</strong> with current focus on <strong>${sanitize(user.weakTopic || "your weak topic")}</strong>.</p>
+          <div class="mt-4 grid gap-3">
+            <div class="rounded-2xl p-4" style="background:rgba(242,166,90,0.10); border:1px solid rgba(242,166,90,0.16);">
+              <p><strong>Start here:</strong> ask for a concept explanation, practice set, test simulation, revision burst, or weakness repair.</p>
+            </div>
+            <div class="rounded-2xl p-4" style="background:rgba(244,231,211,0.06); border:1px solid rgba(244,231,211,0.12);">
+              <p><strong>Example prompts:</strong> “Teach me kinematics from basics”, “Test me on mole concept”, “Fix my weak topic”, or “Give me a quick revision of integration formulas”.</p>
+            </div>
+          </div>
+        </div>
+      `;
+      addMessage("assistant", welcome, `${state.subject} • ${state.mode}`);
+    }
+
+    function hydrateProfile() {
+      topUserName.textContent = user.name || "Student";
+      heroUserName.textContent = user.name || "Student";
+      examTargetBadge.textContent = user.examTarget || "Not set";
+      classInfo.textContent = user.class || "—";
+      streamInfo.textContent = user.stream || "—";
+      weakTopicInfo.textContent = user.weakTopic || "—";
+      sidebarWeakTopic.textContent = user.weakTopic || "Weak topic not set";
+
+      heroSubtext.textContent = `You are preparing for ${user.examTarget || "your exam"} in ${user.class || "your class"} with ${user.stream || "your stream"}. NIYANTRA is ready to guide ${state.subject} in ${state.mode}.`;
+    }
+
+    openSidebarBtn.addEventListener("click", openSidebar);
+    closeSidebarBtn.addEventListener("click", closeSidebar);
+    sidebarOverlay.addEventListener("click", closeSidebar);
+
+    toggleSubjectBarBtn.addEventListener("click", () => {
+      subjectQuickBar.classList.toggle("hidden");
+    });
+
+    subjectItems.forEach(item => {
+      item.addEventListener("click", () => {
+        setSubject(item.dataset.subject);
+        closeSidebar();
+      });
+    });
+
+    quickSubjects.forEach(item => {
+      item.addEventListener("click", () => {
+        setSubject(item.dataset.subject);
+      });
+    });
+
+    modeCards.forEach(card => {
+      card.addEventListener("click", () => setMode(card.dataset.mode));
+    });
+
+    sendBtn.addEventListener("click", sendQuery);
+    commandInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") sendQuery();
+    });
+
+    clearChatBtn.addEventListener("click", () => {
+      state.chat = [];
+      saveState();
+      chatArea.innerHTML = "";
+      seedWelcomeIfNeeded();
+    });
+
+    logoutBtn.addEventListener("click", () => {
+      localStorage.setItem(AUTH_KEY, "false");
+      window.location.href = "login.html";
+    });
+
+    window.addEventListener("resize", syncResponsiveSidebar);
+
+    hydrateProfile();
+    setSubject(state.subject);
+    setMode(state.mode);
+    syncResponsiveSidebar();
+    seedWelcomeIfNeeded();
+  </script>
+</body>
+</html>
